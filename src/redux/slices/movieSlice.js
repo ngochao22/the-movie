@@ -6,7 +6,7 @@ export const fetchMovies = createAsyncThunk(
     "movies/fetchMovies",
     async (type) => {
         const response = await axios.get(
-            `https://api.themoviedb.org/3/trending/all/${type}?api_key=${apiKey}`
+            `https://api.themoviedb.org/3/movie/${type}?api_key=${apiKey}`
         );
         return response?.data?.results;
     }
@@ -14,6 +14,10 @@ export const fetchMovies = createAsyncThunk(
 
 const initialState = {
     listMovies: [],
+    listMoviesNew: [],
+    genreId: null,
+    isButton: false,
+    value: "descending",
     isLoading: false,
     isError: false,
 };
@@ -21,7 +25,21 @@ const initialState = {
 export const movieSlice = createSlice({
     name: "fetchMovies",
     initialState,
-    reducer: {},
+    reducers: {
+        setValue: (state, action) => {
+            state.value = action.payload;
+        },
+        handleClick: (state, action) => {
+            state.genreId = action.payload;
+        },
+        handleSubmit: (state, action) => {
+            state.listMoviesNew = action.payload;
+            state.isButton = true;
+        },
+        handleButton: (state) => {
+            state.isButton = false;
+        },
+    },
     extraReducers: (builder) => {
         builder
             .addCase(fetchMovies.pending, (state) => {
@@ -39,5 +57,8 @@ export const movieSlice = createSlice({
             });
     },
 });
+
+export const { setValue, handleClick, handleSubmit, isButton, handleButton } =
+    movieSlice.actions;
 
 export default movieSlice.reducer;

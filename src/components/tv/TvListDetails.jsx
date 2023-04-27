@@ -1,44 +1,45 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchMovies } from "../../redux/slices/movieSlice";
-import MovieCard from "./MovieCard";
+import MovieCard from "../movies/MovieCard";
+import { fetchDataTv } from "../../redux/slices/tvSlice";
 
-const MovieList = ({ type }) => {
+const TvListDetails = ({ type }) => {
     const dispatch = useDispatch();
-    const listMovies = useSelector((state) => state.movie.listMovies);
+    const listDataTv = useSelector((state) => state.tv.listDataTv);
     const value = useSelector((state) => state.movie.value);
-    let isButton = useSelector((state) => state.movie.isButton);
+    const genreId = useSelector((state) => state.movie.genreId);
     const listMoviesNew = useSelector((state) => state.movie.listMoviesNew);
+    const isButton = useSelector((state) => state.movie.isButton);
 
     useEffect(() => {
-        dispatch(fetchMovies(type));
+        dispatch(fetchDataTv(type));
     }, [type]);
 
-    const listMoviesSort = [...listMovies].sort((a, b) =>
-        b.title.localeCompare(a.title)
+    const listTvSort = [...listDataTv].sort((a, b) =>
+        b.name.localeCompare(a.name)
     );
 
-    const listMoviesReverse = [...listMoviesSort].reverse((a, b) =>
-        b.title.localeCompare(a.title)
+    const listTvReverse = [...listDataTv].reverse((a, b) =>
+        b.name.localeCompare(a.name)
     );
 
     if (!isButton) {
-        if (value === "title2") {
+        if (value === "title1") {
             return (
                 <div className="grid grid-cols-5 ml-20 gap-x-5">
-                    {listMoviesSort.length > 0 &&
-                        listMoviesSort.map((item) => (
+                    {listTvReverse.length > 0 &&
+                        listTvReverse.map((item) => (
                             <MovieCard key={item.id} item={item}></MovieCard>
                         ))}
                 </div>
             );
         }
 
-        if (value === "title1") {
+        if (value === "title2") {
             return (
                 <div className="grid grid-cols-5 ml-20 gap-x-5">
-                    {listMoviesReverse.length > 0 &&
-                        listMoviesReverse.map((item) => (
+                    {listTvSort.length > 0 &&
+                        listTvSort.map((item) => (
                             <MovieCard key={item.id} item={item}></MovieCard>
                         ))}
                 </div>
@@ -47,8 +48,8 @@ const MovieList = ({ type }) => {
 
         return (
             <div className="grid grid-cols-5 ml-20 gap-x-5">
-                {listMovies.length > 0 &&
-                    listMovies.map((item) => (
+                {listDataTv.length > 0 &&
+                    listDataTv.map((item) => (
                         <MovieCard key={item.id} item={item}></MovieCard>
                     ))}
             </div>
@@ -73,4 +74,4 @@ const MovieList = ({ type }) => {
     }
 };
 
-export default MovieList;
+export default TvListDetails;

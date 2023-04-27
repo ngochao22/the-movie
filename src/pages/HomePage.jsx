@@ -1,9 +1,9 @@
 import React, { Fragment } from "react";
 import Banner from "../components/banner/Banner";
-import MovieList from "../components/movies/MovieList";
 import Toggle from "../components/toggle/Toggle";
 import TrailerList from "../components/movies/TrailerList";
 import TvList from "../components/tv/TvList";
+import MovieListTrending from "../components/movies/MovieListTrending";
 
 const HomePage = () => {
     return (
@@ -17,9 +17,9 @@ const HomePage = () => {
                         RightTitle={"This Week"}
                     ></Toggle>
                 </div>
-                <MovieList></MovieList>
+                <MovieListTrending></MovieListTrending>
             </section>
-            <section className="max-w-[1300px] h-[400px] mx-auto relative mt-10">
+            <section className="max-w-[1300px] h-[400px] mx-auto relative">
                 <div className="absolute w-full h-full bg-[#0d253f] opacity-80"></div>
                 <img
                     src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"

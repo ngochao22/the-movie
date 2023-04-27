@@ -4,7 +4,7 @@ import { CircularProgress, CircularProgressLabel } from "@chakra-ui/react";
 const MovieCard = ({ item }) => {
     const result = item.vote_average.toFixed(1) * 10;
     return (
-        <div className="max-w-[150px] h-auto mt-5 rounded-lg select-none flex flex-col cursor-pointer">
+        <div className="w-[180px] h-[380px] mt-5 rounded-lg select-none flex flex-col cursor-pointer shadow-lg mb-10">
             <img
                 src={`https://image.tmdb.org/t/p/original${item.backdrop_path}`}
                 alt=""
@@ -25,8 +25,8 @@ const MovieCard = ({ item }) => {
                     </CircularProgressLabel>
                 </CircularProgress>
             </div>
-            <div className="flex flex-col">
-                <p className="px-2 pt-2 text-lg font-bold leading-tight text-black hover:text-blue-500">
+            <div className="">
+                <p className="px-2 text-lg font-semibold leading-tight text-black hover:text-blue-500">
                     {item.title || item.name}
                 </p>
                 <span className="px-2 pt-1">

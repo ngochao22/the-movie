@@ -1,19 +1,19 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchDataTv } from "../../redux/slices/tvSlice";
+import { fetchMoviesTrending } from "../../redux/slices/movieTrendingSlice";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/scss";
-import MovieCard from "../movies/MovieCard";
+import MovieCard from "./MovieCard";
 
-const TvList = () => {
+const MovieListTrending = () => {
     const dispatch = useDispatch();
-    const listDataTv = useSelector((state) => state.tv.listDataTv);
     const onLeft = useSelector((state) => state.toggle.onLeft);
+    const listMovies = useSelector((state) => state.trending.listMovies);
 
-    const type = onLeft ? "popular" : "top_rated";
+    const type = onLeft ? "day" : "week";
 
     useEffect(() => {
-        dispatch(fetchDataTv(type));
+        dispatch(fetchMoviesTrending(type));
     }, [type]);
 
     return (
@@ -23,8 +23,8 @@ const TvList = () => {
                 slidesPerView={"auto"}
                 spaceBetween={40}
             >
-                {listDataTv.length > 0 &&
-                    listDataTv.map((item) => (
+                {listMovies.length > 0 &&
+                    listMovies.map((item) => (
                         <SwiperSlide key={item.id}>
                             <MovieCard item={item}></MovieCard>
                         </SwiperSlide>
@@ -34,4 +34,4 @@ const TvList = () => {
     );
 };
 
-export default TvList;
+export default MovieListTrending;
